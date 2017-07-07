@@ -12,6 +12,7 @@ const userImg = require('./user-img');
 
 // lib
 const moment = require('moment');
+const marked = require('marked');
 
 // util
 const collection = require('../../util/collection');
@@ -21,7 +22,8 @@ const taskTypeIcons = {
 	bug: 'fa-bug',
 	sync: 'fa-commenting-o',
 	research: 'fa-book',
-	planning: 'fa-road'
+	planning: 'fa-road',
+	activity: 'fa-child'
 };
 
 // time related
@@ -57,15 +59,38 @@ module.exports = ({task, state, actions, opened = false}, content = false) => li
 	(opened) ? modal({
 		onClose: () => actions.tasks.edit(null)
 	}, span('.task-edit', [
+		span('.dropdown.task-type', [
+			i(`.handle.fa.${taskTypeIcons[task.type] || 'fa-code'}`),
+			ul(Object.keys(taskTypeIcons).map(type =>
+				li({
+					on: {
+						click: () => actions.tasks.update(task._id, {type}, false)
+					}
+				}, span([
+					i(`.fa.${taskTypeIcons[type]}`), ' ', type
+				]))
+			))
+		]),
 		h2('[contenteditable="true"]', {
 			on: {blur: ev => actions.tasks.update(task._id, {name: ev.target.textContent}, false)}
 		}, task.name),
-		pre('.task-story[contenteditable="true"][placeholder="Story ..."]', {
-			on: {
-				focus: ev => (ev.target.textContent = task.story || ''),
-				blur: ev => actions.tasks.update(task._id, {story: ev.target.textContent}, false)
-			}
-		}, task.story || 'Story ...'),
+		pre('.task-story', [
+			span('[contenteditable="true"][placeholder="Story ..."]', {
+				on: {
+					focus: ev => {
+						ev.target.textContent = task.story || '';
+						// (ev.target.innerHTML = task.story ? marked(task.story) : '')
+					},
+					blur: ev => {
+						actions.tasks.update(task._id, {story: ev.target.textContent}, false);
+					}
+				}
+			}, task.story ? task.story : 'Story ...'),
+			div('.task-story-edit-type', [
+				button('wysiwyg'),
+				button('markdown')
+			])
+		]),
 		label('Users'),
 		ul('.task-users', [].concat(
 			task.users ? task.users.map(user => li(userImg({

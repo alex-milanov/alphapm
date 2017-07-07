@@ -14,8 +14,8 @@
     "livereload": "livereload dist/**/*.css -d",
     "start": "nodemon server --ignore src/ & npm run watch",
     "start:proc": "npm run build && PORT=3004 nodemon server & xdg-open http://localhost:3004",
-		"sync:gh": "git checkout gh-pages && git rebase master && git push && git checkout master",
-		"db:dump": "mongodump -d alphapm -o ./dump/$(date +%Y-%m-%d-%H-%M-%S)"
+    "sync:gh": "git checkout gh-pages && git rebase master && git push && git checkout master",
+    "db:dump": "mongodump -d alphapm -o ./dump/$(date +%Y-%m-%d-%H-%M-%S)"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "iblokz-rest-api": "^1.1.0",
     "iblokz-snabbdom-helpers": "^1.0.0",
     "jsonwebtoken": "^7.3.0",
+    "marked": "^0.3.6",
     "method-override": "^2.3.6",
     "moment": "^2.18.1",
     "mongoose": "^4.6.3",

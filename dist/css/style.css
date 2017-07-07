@@ -2774,25 +2774,25 @@ ul.accordion {
   padding: 5px;
   width: 100%;
   list-style: none; }
-  #ui .tasks li {
+  #ui .tasks > li {
     display: inline-block;
     margin: 0px 0px 7px 0px;
     padding: 0px;
     box-sizing: border-box;
     border-radius: 3px;
     transition: background .5s, box-shadow .5s; }
-    #ui .tasks li.placeholder {
+    #ui .tasks > li.placeholder {
       opacity: 0.1;
       margin-bottom: 7px; }
-    #ui .tasks li.task {
+    #ui .tasks > li.task {
       user-select: none;
       box-shadow: 1px 1px 3px #bbb;
       background: #eaeaea;
       cursor: pointer; }
-      #ui .tasks li.task:hover {
+      #ui .tasks > li.task:hover {
         background: #efefef;
         box-shadow: 1px 1px 4px #aaa; }
-      #ui .tasks li.task > :not(.wrapper) {
+      #ui .tasks > li.task > :not(.wrapper) {
         margin: 0px;
         padding: 0px;
         display: inline-block;
@@ -2802,12 +2802,12 @@ ul.accordion {
         float: left;
         box-sizing: border-box;
         padding: 0 10px; }
-      #ui .tasks li.task .task-name i.fa {
+      #ui .tasks > li.task .task-name i.fa {
         line-height: 32px;
         width: 20px;
         margin-right: 7px;
         text-align: center; }
-    #ui .tasks li.add-task button, #ui .tasks li.add-task input {
+    #ui .tasks > li.add-task button, #ui .tasks > li.add-task input {
       margin: 0px;
       padding: 0px;
       display: inline-block;
@@ -2825,13 +2825,13 @@ ul.accordion {
       background: #cfcfcf;
       opacity: 0.5;
       transition: opacity .3s; }
-      #ui .tasks li.add-task button:hover, #ui .tasks li.add-task input:hover {
+      #ui .tasks > li.add-task button:hover, #ui .tasks > li.add-task input:hover {
         opacity: 1;
         outline: none; }
-    #ui .tasks li.add-task input:focus, #ui .tasks li.add-task input:active {
+    #ui .tasks > li.add-task input:focus, #ui .tasks > li.add-task input:active {
       opacity: 1;
       outline: none; }
-    #ui .tasks li > h2 {
+    #ui .tasks > li > h2 {
       margin: 0px;
       padding: 0px;
       display: inline-block;
@@ -2908,19 +2908,19 @@ ul.accordion {
   height: 100%;
   display: inline-block;
   vertical-align: top; }
-  #ui .columns .tasks li {
+  #ui .columns .tasks > li {
     display: inline-block;
     width: 100%;
     font-size: 16px;
     position: relative; }
-    #ui .columns .tasks li .task-name {
+    #ui .columns .tasks > li .task-name {
       width: 60%;
       height: auto; }
-    #ui .columns .tasks li > .task-users {
+    #ui .columns .tasks > li > .task-users {
       width: 40%;
       height: auto;
       text-align: right; }
-      #ui .columns .tasks li > .task-users img {
+      #ui .columns .tasks > li > .task-users img {
         margin: 0px;
         padding: 0px;
         display: inline-block;
@@ -2928,20 +2928,20 @@ ul.accordion {
         height: 24px;
         line-height: 24px;
         margin: 4px 0px 4px 4px; }
-    #ui .columns .tasks li .task-project {
+    #ui .columns .tasks > li .task-project {
       width: 50%; }
-    #ui .columns .tasks li .task-status {
+    #ui .columns .tasks > li .task-status {
       display: none; }
-    #ui .columns .tasks li .task-time {
+    #ui .columns .tasks > li .task-time {
       width: 50%;
       text-align: right; }
-      #ui .columns .tasks li .task-time > * {
+      #ui .columns .tasks > li .task-time > * {
         margin: 0px 3px; }
-    #ui .columns .tasks li .task-est, #ui .columns .tasks li .task-ass {
+    #ui .columns .tasks > li .task-est, #ui .columns .tasks > li .task-ass {
       width: 50%; }
-    #ui .columns .tasks li > h2 {
+    #ui .columns .tasks > li > h2 {
       vertical-align: middle; }
-      #ui .columns .tasks li > h2 > span {
+      #ui .columns .tasks > li > h2 > span {
         margin: 0px;
         padding: 0px;
         display: inline-block;
@@ -2949,15 +2949,17 @@ ul.accordion {
         height: 32px;
         line-height: 32px;
         vertical-align: middle; }
-      #ui .columns .tasks li > h2 .dropdown {
+      #ui .columns .tasks > li > h2 .dropdown {
         float: none; }
-        #ui .columns .tasks li > h2 .dropdown .handle {
+        #ui .columns .tasks > li > h2 .dropdown .handle {
           margin: 0px;
           padding: 0px;
           display: inline-block;
           box-sizing: border-box;
           height: 32px;
           line-height: 32px; }
+        #ui .columns .tasks > li > h2 .dropdown ul {
+          font-size: 16px; }
 
 #ui .projects .group > h2 {
   margin: 0px;
@@ -3177,12 +3179,36 @@ ul.accordion {
   #ui .task-edit h2:focus {
     box-shadow: inset 0px -4px 30px #ccc; }
 
+#ui .task-edit .task-type {
+  position: absolute;
+  top: 0px;
+  left: 0px; }
+  #ui .task-edit .task-type > i.fa, #ui .task-edit .task-type > i.fa:before {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 64px;
+    line-height: 64px;
+    width: 64px;
+    font-size: 28px;
+    text-align: center;
+    cursor: pointer; }
+  #ui .task-edit .task-type > ul {
+    top: 55px;
+    left: 25px; }
+    #ui .task-edit .task-type > ul > li {
+      cursor: pointer; }
+      #ui .task-edit .task-type > ul > li .fa {
+        width: 24px;
+        text-align: center; }
+
 #ui .task-edit .task-story {
   margin: 0px;
   padding: 0px;
   display: inline-block;
   box-sizing: border-box;
-  padding: 0px 10px;
+  position: relative;
   width: 100%;
   white-space: pre-line;
   min-height: 32px;
@@ -3192,12 +3218,58 @@ ul.accordion {
   box-sizing: border-box;
   font-size: 18px;
   color: #777;
-  outline: none;
-  transition: box-shadow .7s, color .7s, height .7s, min-height .7s; }
-  #ui .task-edit .task-story:focus {
-    color: #333;
-    box-shadow: inset 0px 0px 30px #ccc;
-    min-height: 128px; }
+  transition: height .7s, min-height .7s; }
+  #ui .task-edit .task-story span {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    transition: box-shadow .7s, color .7s, height .7s, min-height .7s; }
+    #ui .task-edit .task-story span:focus {
+      color: #333;
+      box-shadow: inset 0px 0px 30px #ccc;
+      min-height: 128px; }
+  #ui .task-edit .task-story:hover .task-story-edit-type, #ui .task-edit .task-story > span:focus + .task-story-edit-type {
+    opacity: 0.6; }
+  #ui .task-edit .task-story .task-story-edit-type {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 20px;
+    line-height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    box-sizing: content-box;
+    border: 1px solid #aaa;
+    opacity: 0;
+    transition: opacity .7s .3s; }
+    #ui .task-edit .task-story .task-story-edit-type:hover {
+      opacity: 1 !important; }
+    #ui .task-edit .task-story .task-story-edit-type button {
+      margin: 0px;
+      padding: 0px;
+      display: inline-block;
+      box-sizing: border-box;
+      height: 20px;
+      line-height: 20px;
+      box-sizing: border-box;
+      padding: 0px 5px;
+      float: left;
+      border: 0px;
+      background: #ddd;
+      outline: none; }
+      #ui .task-edit .task-story .task-story-edit-type button:hover {
+        background: #eee; }
+      #ui .task-edit .task-story .task-story-edit-type button.active {
+        background: #ccc; }
+      #ui .task-edit .task-story .task-story-edit-type button:not(:first-child) {
+        border-left: 1px solid #aaa; }
 
 #ui .task-edit label {
   margin: 0px;

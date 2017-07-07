@@ -9,9 +9,28 @@
 		transition: box-shadow .7s
 		&:focus
 			box-shadow: inset 0px -4px 30px #ccc
+	.task-type
+		position: absolute
+		top: 0px
+		left: 0px
+		> i.fa, > i.fa:before
+			+header-height(64px)
+			width: 64px
+			font-size: 28px
+			text-align: center
+			cursor: pointer
+		> ul
+			top: 55px
+			left: 25px
+			> li
+				cursor: pointer
+				.fa
+					width: 24px
+					text-align: center
+
 	.task-story
 		+reset
-		padding: 0px 10px
+		position: relative
 		width: 100%
 		white-space: pre-line
 		min-height: 32px
@@ -21,12 +40,45 @@
 		box-sizing: border-box
 		font-size: 18px
 		color: #777
-		outline: none
-		transition: box-shadow .7s, color .7s, height .7s, min-height .7s
-		&:focus
-			color: #333
-			box-shadow: inset 0px 0px 30px #ccc
-			min-height: 128px
+		transition: height .7s, min-height .7s
+		span
+			+reset
+			padding: 0px 10px
+			width: 100%
+			height: 100%
+			outline: none
+			transition: box-shadow .7s, color .7s, height .7s, min-height .7s
+			&:focus
+				color: #333
+				box-shadow: inset 0px 0px 30px #ccc
+				min-height: 128px
+		&:hover .task-story-edit-type, > span:focus + .task-story-edit-type
+			opacity: 0.6
+		.task-story-edit-type
+			+header-height(20px)
+			position: absolute
+			top: 5px
+			right: 5px
+			box-sizing: content-box
+			border: 1px solid #aaa
+			opacity: 0
+			transition: opacity .7s .3s
+			&:hover
+				opacity: 1!important
+			button
+				+header-height(20px)
+				box-sizing: border-box
+				padding: 0px 5px
+				float: left
+				border: 0px
+				background: #ddd
+				outline: none
+				&:hover
+					background: #eee
+				&.active
+					background: #ccc
+				&:not(:first-child)
+					border-left: 1px solid #aaa
 	label
 		+header-height(32px)
 		padding: 0px 10px

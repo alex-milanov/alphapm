@@ -150,9 +150,11 @@ state$
 	.subscribe(state => moment.locale(state.lang));
 
 // resources sync
+const sync$ = $.interval(1000).timeInterval().startWith({})
+	.withLatestFrom(state$, (t, state) => state)
+	.filter(state => state.auth && state.auth.user !== null && state.auth.token !== null);
 // tasks
-$.interval(5000 /* ms */).timeInterval().startWith({})
-		.withLatestFrom(state$, (t, state) => state)
+sync$.throttle(5000 /* ms */) // sync every 5s
 		.flatMap(state => request
 			.get('/api/tasks?limit=1000')
 			.set(state.auth.token && {'x-access-token': state.auth.token} || {})
@@ -161,8 +163,7 @@ $.interval(5000 /* ms */).timeInterval().startWith({})
 		.subscribe(res => actions.tasks.upsert(res.body.list));
 
 // projects
-$.interval(10000 /* ms */).timeInterval().startWith({})
-		.withLatestFrom(state$, (t, state) => state)
+sync$.throttle(10000 /* ms */) // sync every 10s
 		.flatMap(state => request
 			.get('/api/projects?limit=1000')
 			.set(state.auth.token && {'x-access-token': state.auth.token} || {})
@@ -171,13 +172,17 @@ $.interval(10000 /* ms */).timeInterval().startWith({})
 		.subscribe(res => actions.projects.upsert(res.body.list));
 
 // users
-$.interval(10000 /* ms */).timeInterval().startWith({})
-		.withLatestFrom(state$, (t, state) => state)
+sync$.throttle(10000 /* ms */) // sync every 10s
 		.flatMap(state => request
 			.get('/api/users?limit=1000')
 			.observe()
 		).filter(res => res.status === 200)
 		.subscribe(res => actions.users.upsert(res.body.list));
+
+// remove resources when user logs out
+state$.distinctUntilChanged(state => state.auth)
+	.filter(state => state.auth.user === null && state.auth.token === null)
+	.subscribe(() => actions.reset());
 
 // connect state stream
 state$.connect();

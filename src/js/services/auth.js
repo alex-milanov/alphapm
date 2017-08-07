@@ -27,7 +27,7 @@ const login = data => request
 			store.set('user', body.user);
 			store.set('token', body.token);
 			// window.location = '#/admin';
-			return state => obj.patch(state, 'auth', {user: body.user});
+			return state => obj.patch(state, 'auth', {user: body.user, token: body.token});
 		}
 		return state => state;
 	});

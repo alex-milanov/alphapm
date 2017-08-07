@@ -22,6 +22,12 @@ const initial = {
 	modal: false
 };
 
+const reset = () => state => Object.assign({}, state, {
+	projects: projects.initial,
+	tasks: tasks.initial,
+	project: false
+});
+
 // actions
 const set = (key, value) => state => obj.patch(state, key, value);
 const toggle = key => state => obj.patch(state, key, !obj.sub(state, key));
@@ -36,5 +42,6 @@ module.exports = {
 	set,
 	toggle,
 	arrToggle,
-	resetProject
+	resetProject,
+	reset
 };

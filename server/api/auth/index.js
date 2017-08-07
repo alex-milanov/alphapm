@@ -20,7 +20,12 @@ module.exports = ({app, db, config}) => {
 					return next();
 				}
 				// if everything is good, save to request for use in other routes
-				req.user = r._doc;
+				req.user = {
+					_id: r._doc._id,
+					name: r._doc.name,
+					email: r._doc.email,
+					role: r._doc.role
+				};
 				return next();
 			});
 		} else {
@@ -51,7 +56,12 @@ module.exports = ({app, db, config}) => {
 								success: true,
 								message: 'Enjoy your token!',
 								token,
-								user
+								user: {
+									_id: user._id,
+									name: user.name,
+									email: user.email,
+									role: user.role
+								}
 							});
 						}
 					}

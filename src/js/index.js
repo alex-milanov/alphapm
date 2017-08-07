@@ -159,7 +159,9 @@ sync$.throttle(5000 /* ms */) // sync every 5s
 			.get('/api/tasks?limit=1000')
 			.set(state.auth.token && {'x-access-token': state.auth.token} || {})
 			.observe()
-		).filter(res => res.status === 200)
+			.catch(e => (console.log(e.status), $.just({status: e.status, body: {list: []}})))
+		)
+		.filter(res => res.status === 200)
 		.subscribe(res => actions.tasks.upsert(res.body.list));
 
 // projects
@@ -168,7 +170,9 @@ sync$.throttle(10000 /* ms */) // sync every 10s
 			.get('/api/projects?limit=1000')
 			.set(state.auth.token && {'x-access-token': state.auth.token} || {})
 			.observe()
-		).filter(res => res.status === 200)
+			.catch(e => (console.log(e.status), $.just({status: e.status, body: {list: []}})))
+		)
+		.filter(res => res.status === 200)
 		.subscribe(res => actions.projects.upsert(res.body.list));
 
 // users
@@ -176,7 +180,9 @@ sync$.throttle(10000 /* ms */) // sync every 10s
 		.flatMap(state => request
 			.get('/api/users?limit=1000')
 			.observe()
-		).filter(res => res.status === 200)
+			.catch(e => (console.log(e.status), $.just({status: e.status, body: {list: []}})))
+		)
+		.filter(res => res.status === 200)
 		.subscribe(res => actions.users.upsert(res.body.list));
 
 // remove resources when user logs out

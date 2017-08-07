@@ -16,7 +16,7 @@ module.exports = ({db}) => {
 	}));
 	console.log('task.project: "String" => task.project: {name: "String", _id: ObjectID}');
 	// task.project: "String" => task.project: {name: "String", _id: ObjectID}
-	Task.find({project: {$type: 'string'}}).then(tasks => tasks.forEach(task => {
+	Task.find({project: {$type: 2}}).then(tasks => tasks.forEach(task => {
 		// console.log(task.project);
 		Project.findOneAndUpdate({name: task.project}, {name: task.project}, {upsert: true, new: true},
 			(err, res) => {

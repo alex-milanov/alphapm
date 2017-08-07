@@ -1596,6 +1596,11 @@
       "from": "hosted-git-info@>=2.1.4 <3.0.0",
       "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.2.tgz"
     },
+    "html-tags": {
+      "version": "2.0.0",
+      "from": "html-tags@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/html-tags/-/html-tags-2.0.0.tgz"
+    },
     "htmlescape": {
       "version": "1.1.1",
       "from": "htmlescape@>=1.1.0 <2.0.0",
@@ -1617,14 +1622,14 @@
       "resolved": "https://registry.npmjs.org/https-browserify/-/https-browserify-0.0.1.tgz"
     },
     "iblokz-data": {
-      "version": "1.0.2",
-      "from": "iblokz-data@>=1.0.2 <2.0.0",
-      "resolved": "https://registry.npmjs.org/iblokz-data/-/iblokz-data-1.0.2.tgz"
+      "version": "1.1.0",
+      "from": "iblokz-data@1.1.0",
+      "resolved": "https://registry.npmjs.org/iblokz-data/-/iblokz-data-1.1.0.tgz"
     },
     "iblokz-rest-api": {
-      "version": "1.1.0",
-      "from": "iblokz-rest-api@>=1.1.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/iblokz-rest-api/-/iblokz-rest-api-1.1.0.tgz",
+      "version": "1.2.0",
+      "from": "iblokz-rest-api@latest",
+      "resolved": "https://registry.npmjs.org/iblokz-rest-api/-/iblokz-rest-api-1.2.0.tgz",
       "dependencies": {
         "accepts": {
           "version": "1.1.4",
@@ -1786,14 +1791,14 @@
       }
     },
     "iblokz-snabbdom-helpers": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "from": "iblokz-snabbdom-helpers@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/iblokz-snabbdom-helpers/-/iblokz-snabbdom-helpers-1.0.0.tgz",
+      "resolved": "https://registry.npmjs.org/iblokz-snabbdom-helpers/-/iblokz-snabbdom-helpers-1.1.0.tgz",
       "dependencies": {
         "snabbdom": {
-          "version": "0.6.7",
+          "version": "0.6.9",
           "from": "snabbdom@>=0.6.5 <0.7.0",
-          "resolved": "https://registry.npmjs.org/snabbdom/-/snabbdom-0.6.7.tgz"
+          "resolved": "https://registry.npmjs.org/snabbdom/-/snabbdom-0.6.9.tgz"
         }
       }
     },

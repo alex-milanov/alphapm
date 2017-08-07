@@ -46,7 +46,7 @@ const upsert = list => state =>
 	})
 	: state;
 
-const toggleUser = (projectId, user) => state => obj.patch(state, 'projects', {
+const toggleUser = (projectId, user) => state => obj.patch(obj.patch(state, 'projects', {
 	needsRefresh: false,
 	list: collection.patchAt(state.projects.list, '_id', projectId, {
 		users: [collection.elementAt(state.projects.list, '_id', projectId).users].map(projectUsers => [].concat(
@@ -54,6 +54,18 @@ const toggleUser = (projectId, user) => state => obj.patch(state, 'projects', {
 			collection.indexAt(projectUsers, '_id', user._id) > -1 ? [] : user
 		)).pop()
 	})
+}), 'tasks', {
+	needsRefresh: false,
+	list: [].concat(
+		state.tasks.list.filter(task => task.project._id !== projectId),
+		state.tasks.list.filter(task => task.project._id === projectId)
+			.map(task => obj.patch(task, 'project', {
+				users: [collection.elementAt(state.projects.list, '_id', projectId).users].map(projectUsers => [].concat(
+					projectUsers.filter(u => u._id !== user._id),
+					collection.indexAt(projectUsers, '_id', user._id) > -1 ? [] : user
+				)).pop()
+			}))
+	)
 });
 
 module.exports = {

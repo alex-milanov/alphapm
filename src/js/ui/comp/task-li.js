@@ -51,9 +51,11 @@ module.exports = ({task, state, actions, opened = false}, content = false) => li
 		span('.task-time', [].concat(
 			(task.status === 'doing')
 				? [i('.fa.fa-clock-o'), span('task-ass', moment.utc(getCurrentTracking(task)).format('H:mm:ss'))]
-				: span('task-ass', moment.utc(getTrackedTime(task)).format('H:mm')),
-			'/',
-			span('.task-est', moment.utc(task.est * 10000).format('H:mm'))
+				: [
+					span('task-ass', moment.utc(getTrackedTime(task)).format('H:mm')),
+					'/',
+					span('.task-est', moment.utc(task.est * 10000).format('H:mm'))
+				]
 		))
 	],
 	(opened) ? modal({

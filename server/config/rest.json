@@ -10,7 +10,13 @@
 				"story": "String",
 				"project": {
 					"_id": {"type": "ObjectId", "ref": "Project"},
-					"name": "String"
+					"name": "String",
+					"users": [{
+						"_id": {"type": "ObjectId", "ref": "User"},
+						"name": "String",
+						"email": "String",
+						"role": "String"
+					}]
 				},
 				"time": {
 					"ass": "Number",
@@ -26,7 +32,8 @@
 				"users": [{
 					"_id": {"type": "ObjectId", "ref": "User"},
 					"name": "String",
-					"email": "String"
+					"email": "String",
+					"role": "String"
 				}],
 				"type": "String",
 				"status": "String",
@@ -65,7 +72,6 @@
 				"_meta": {
 					"access": {
 						"admin": "all",
-						"publisher": "own",
 						"user": "list,view",
 						"anonymous": "create,list"
 					}
@@ -73,10 +79,23 @@
 			},
 			"tasks": {
 				"_meta": {
+					"assigned": [
+						"users",
+						"project.users"
+					],
+					"access": {
+						"admin": "all",
+						"user": "own,assigned"
+					}
 				}
 			},
 			"projects": {
 				"_meta": {
+					"assigned": "users",
+					"access": {
+						"admin": "all",
+						"user": "own,assigned"
+					}
 				}
 			}
 		}

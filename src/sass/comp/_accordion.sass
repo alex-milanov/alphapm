@@ -9,7 +9,7 @@ ul.accordion
 		+header-height(32px)
 		cursor: pointer
 		text-align: center
-		font-size: 16px
+		font-size: 1em
 		transition: background .5s
 		> *
 			+header-height(32px)
@@ -21,13 +21,15 @@ ul.accordion
 			text-align: left
 			width: 0px
 			opacity: 0
+			line-height: 30px
+			padding-top: 2px
 			transition: width .5s, opacity .3s .25s
 		&:first-child
 			border-radius: 3px 0px 0px 3px
 		&:last-child
 			border-radius: 0px 3px 3px 0px
 		&.active
-			background: #ededed
+			background: $alphapm-color-card-bg
 			> span
 				opacity: 1
 				+phone
@@ -35,4 +37,4 @@ ul.accordion
 					opacity: 0
 					visibility: hidden
 		&:hover
-			background: #f2f2f2
+			background: lighten($alphapm-color-card-bg, 3%)

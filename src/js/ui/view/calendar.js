@@ -37,8 +37,8 @@ module.exports = ({state, actions, i18n}) => section('#view.calendar', getWeekda
 				&& act.start <= parseInt(moment(day).endOf('day').format('X'), 10)
 			).map(act =>
 			li('.task', [
-				span(act.task.name),
-				span({style: {float: 'right'}}, moment.unix(act.start).format('H:mm'))
+				div(act.task.name),
+				div('.text-right', moment.unix(act.start).format('H:mm'))
 			])
 		),
 		li('.add-task', [

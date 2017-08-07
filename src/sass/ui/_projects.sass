@@ -10,7 +10,8 @@
 			box-sizing: border-box
 			border-radius: 3px
 			display: block
-			font-size: 20px
+			font-size: 1.3em
+			font-weight: 400
 			text-align: center
 			color: #777
 		> ul
@@ -28,16 +29,18 @@
 				transition: background .5s, box-shadow .5s
 				user-select: none
 				box-shadow: 1px 1px 3px #bbb
-				background: #eaeaea
+				background: $alphapm-color-card-bg
 				cursor: pointer
 				width: 24.6%
+				&:hover
+					background: lighten($alphapm-color-card-bg, 3%)
 				> *
 					float: left
 				.project-name
 					+header-height(64px)
 					padding: 0px 10px
 					width: 70%
-					font-size: 18px
+					font-size: 1.1em
 					box-sizing: border-box
 				.project-data
 					+reset
@@ -47,7 +50,6 @@
 					box-sizing: border-box
 					> *
 						+header-height(32px)
-						font-size: 14px
 						float: left
 						width: 100%
 						text-align: right
@@ -55,11 +57,11 @@
 					.project-users
 						img
 							+header-height(24px)
-							margin: 4px 0px 4px 4px	
+							margin: 4px 0px 4px 4px
 				&.add-project
 					padding: 0px
 					box-shadow: inset 1px 1px 3px #aaa
-					background: #cfcfcf
+					background: $alphapm-color-card-add
 					opacity: 0.5
 					transition: opacity .3s
 					&:hover
@@ -74,7 +76,7 @@
 						padding: 0px 10px
 						border: 0px
 						background: none
-						font-size: 18px
+						font-size: 1.1em
 						box-sizing: border-box
 						outline: none
 				.project-edit
@@ -103,4 +105,3 @@
 								&:hover
 									background: #eee
 									outline: none
-				

@@ -33,10 +33,10 @@
 		&.task
 			user-select: none
 			box-shadow: 1px 1px 3px #bbb
-			background: #eaeaea
+			background: $alphapm-color-card-bg
 			cursor: pointer
 			&:hover
-				background: #efefef
+				background: lighten($alphapm-color-card-bg, 3%)
 				box-shadow: 1px 1px 4px #aaa
 			> :not(.wrapper)
 				+header-height(32px)
@@ -60,7 +60,7 @@
 				border: 0px
 				border-radius: 3px
 				box-shadow: inset 1px 1px 3px #aaa
-				background: #cfcfcf
+				background: $alphapm-color-card-add
 				opacity: 0.5
 				transition: opacity .3s
 				&:hover
@@ -79,6 +79,7 @@
 			box-sizing: border-box
 			border-radius: 3px
 			display: block
-			font-size: 20px
+			font-size: 1.3em
+			font-weight: 400
 			text-align: center
 			color: #777

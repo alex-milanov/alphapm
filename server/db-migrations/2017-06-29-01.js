@@ -18,11 +18,12 @@ module.exports = ({db}) => {
 	// task.project: "String" => task.project: {name: "String", _id: ObjectID}
 	Task.find({project: {$type: 'string'}}).then(tasks => tasks.forEach(task => {
 		// console.log(task.project);
-		Project.findOneAndUpdate({name: task.project}, {name: task.project}, {upsert: true, new: true}, (err, res) => {
-			// console.log(res, err);
-			task.set('project', res.toObject());
-			task.save(err => console.log(err));
-		});
+		Project.findOneAndUpdate({name: task.project}, {name: task.project}, {upsert: true, new: true},
+			(err, res) => {
+				// console.log(res, err);
+				task.set('project', res.toObject());
+				task.save(err => console.log(err));
+			});
 	}));
 	console.log('end');
 };

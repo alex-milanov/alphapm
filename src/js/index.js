@@ -152,25 +152,32 @@ state$
 // resources sync
 // tasks
 $.interval(5000 /* ms */).timeInterval().startWith({})
-		.flatMap(() => request
+		.withLatestFrom(state$, (t, state) => state)
+		.flatMap(state => request
 			.get('/api/tasks?limit=1000')
+			.set(state.auth.token && {'x-access-token': state.auth.token} || {})
 			.observe()
 		).filter(res => res.status === 200)
 		.subscribe(res => actions.tasks.upsert(res.body.list));
+
+// projects
+$.interval(10000 /* ms */).timeInterval().startWith({})
+		.withLatestFrom(state$, (t, state) => state)
+		.flatMap(state => request
+			.get('/api/projects?limit=1000')
+			.set(state.auth.token && {'x-access-token': state.auth.token} || {})
+			.observe()
+		).filter(res => res.status === 200)
+		.subscribe(res => actions.projects.upsert(res.body.list));
+
 // users
 $.interval(10000 /* ms */).timeInterval().startWith({})
-		.flatMap(() => request
+		.withLatestFrom(state$, (t, state) => state)
+		.flatMap(state => request
 			.get('/api/users?limit=1000')
 			.observe()
 		).filter(res => res.status === 200)
 		.subscribe(res => actions.users.upsert(res.body.list));
-// projects
-$.interval(10000 /* ms */).timeInterval().startWith({})
-		.flatMap(() => request
-			.get('/api/projects?limit=1000')
-			.observe()
-		).filter(res => res.status === 200)
-		.subscribe(res => actions.projects.upsert(res.body.list));
 
 // connect state stream
 state$.connect();

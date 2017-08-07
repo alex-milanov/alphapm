@@ -48,6 +48,7 @@ require('./api/projects')({app, db, config});
 // migrations
 require('./db-migrations/2017-06-29-01')({app, db, config});
 require('./db-migrations/2017-07-03-01')({app, db, config});
+require('./db-migrations/2017-08-04-01')({app, db, config});
 
 // Logging initialization
 app.listen(config.port, () => console.log(`Listening to port ${config.port}`));

@@ -31,7 +31,6 @@ const langFlags = {
 	ko: 'kr'
 };
 
-
 const formToData = form => Array.from(form.elements)
 	// .map(el => (console.log(el.name), el))
 	.filter(el => el.name !== undefined)
@@ -47,7 +46,10 @@ module.exports = ({state, actions, views, i18n}) => header([
 				}, [
 					i(`.fa.fa-${view.icon}`),
 					span({
-						style: {width: (view.key === state.view) ? ((i18n.views[view.key].length * ((state.lang !== 'ko') ? 9 : 16)) + 7) + 'px' : '0px'}
+						style: {
+							width: (view.key === state.view)
+								? ((i18n.views[view.key].length * ((state.lang !== 'ko') ? 9 : 16)) + 7) + 'px' : '0px'
+						}
 					}, (view.key === state.view) ? i18n.views[view.key] : '')
 				])
 			)
@@ -58,11 +60,19 @@ module.exports = ({state, actions, views, i18n}) => header([
 				i('.handle.fa.fa-toggle-down'),
 				ul([].concat(
 					state.project !== false
-						? li({on: {click: () => actions.resetProject()}}, span(i18n.common.allProjects)) : [],
-					(obj.sub(state, ['projects', 'list']) || state.tasks.list.reduce((projects, task) => (projects.indexOf(task.project) === -1)
-						? [].concat(projects, task.project)
-						: projects, []))
-					.filter(project => state.project === false || (project._id && project._id !== state.project._id) || (!project._id && project !== state.project))
+						? li({
+							on: {
+								click: () => actions.resetProject()
+							}
+						}, span(i18n.common.allProjects)) : [],
+					(obj.sub(state, ['projects', 'list'])
+						|| state.tasks.list.reduce((projects, task) => (projects.indexOf(task.project) === -1)
+							? [].concat(projects, task.project)
+							: projects, [])
+					)
+					.filter(project => state.project === false
+							|| (project._id && project._id !== state.project._id)
+							|| (!project._id && project !== state.project))
 					.map(project =>
 						li({on: {click: () => actions.set('project', project)}}, span(project.name || project))
 					)))

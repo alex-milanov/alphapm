@@ -11,7 +11,13 @@ const upsert = (docs, collection, db) => {
 				: {},
 			doc.createdBy
 				?	{createdBy: new ObjectID(doc.createdBy)}
-				: {}
+				: {},
+			doc.users && doc.users instanceof Array
+				? {
+					users: doc.users.map(u => Object.assign({}, u, {
+						_id: new ObjectID(u._id)
+					}))
+				} : {}
 		))
 		.forEach(doc => {
 			bulk.find({_id: doc._id}).upsert().replaceOne(doc);

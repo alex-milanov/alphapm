@@ -23,9 +23,9 @@ const statuses = ['backlog', 'todo', 'doing', 'done'];
 
 module.exports = ({state, actions, i18n}) => section('#view.list', [
 	div('.filter-row', [].concat(
-		`${i18n.view.list.showingTasks} `,
+		`${i18n.view.list.showingTasks}: `,
 		a('.filter-box.dropdown', [
-			span('.handle.small',
+			span('.handle',
 				state.tasks.filters.agendaStatus.map(status => i18n.task.status[status]).join(', ')
 			),
 			ul(statuses.map(status =>
@@ -46,7 +46,7 @@ module.exports = ({state, actions, i18n}) => section('#view.list', [
 			))
 		]),
 		state.tasks.filters.agendaStatus.indexOf('done') > -1 ? [', ', a('.filter-box.dropdown', [
-			span('.handle.small',
+			span('.handle',
 				`(${i18n.task.filters.donePeriod[state.tasks.filters.donePeriod]})` || ''),
 			ul(['all', 'thisWeek', 'thisMonth'].map(period =>
 				li('.text-left', {
@@ -95,7 +95,8 @@ module.exports = ({state, actions, i18n}) => section('#view.list', [
 		})))
 	].concat(
 		state.tasks.list
-		.filter(task => state.project === false || (task.project.name || task.project) === (state.project.name || state.project))
+		.filter(task =>
+			state.project === false || (task.project.name || task.project) === (state.project.name || state.project))
 		// filter by status
 		.filter(task => state.tasks.filters.agendaStatus.indexOf(task.status) > -1)
 		// filter by period for done tasks
@@ -103,8 +104,10 @@ module.exports = ({state, actions, i18n}) => section('#view.list', [
 			task.status !== 'done'
 			|| state.tasks.filters.agendaStatus.indexOf('done') === -1
 			|| state.tasks.filters.donePeriod === 'all'
-			|| state.tasks.filters.donePeriod === 'thisWeek' && task.activities.length > 0 && task.activities.slice(-1).pop().end >= moment().startOf('isoweek').unix()
-			|| state.tasks.filters.donePeriod === 'thisMonth' && task.activities.length > 0 && task.activities.slice(-1).pop().end >= moment().startOf('month').unix()
+			|| state.tasks.filters.donePeriod === 'thisWeek'
+				&& task.activities.length > 0 && task.activities.slice(-1).pop().end >= moment().startOf('isoweek').unix()
+			|| state.tasks.filters.donePeriod === 'thisMonth'
+				&& task.activities.length > 0 && task.activities.slice(-1).pop().end >= moment().startOf('month').unix()
 		)
 		.filter(task =>
 			state.tasks.filters.search === ''
@@ -135,12 +138,13 @@ module.exports = ({state, actions, i18n}) => section('#view.list', [
 					(task.status === 'doing')
 						? [
 							i('.fa.fa-clock-o'),
-							span('task-ass', moment.utc(
+							span('.task-ass', moment.utc(
 								task.activities
 									.filter(act => act.type === 'tracking' && act.end > 0)
 									.reduce((ass, act) => ass + act.end - act.start, 0) * 1000 +
 								(getTimestamp() - task.activities.slice(-1).pop().start) * 1000)
-								.format('H:mm:ss')),
+								.format('H:mm:ss')
+							),
 							// '/',
 							// span('.task-est', moment.utc(task.est * 10000).format('H:mm')),
 							button('.fa.fa-pause-circle[style="color: #d6c533"]', {

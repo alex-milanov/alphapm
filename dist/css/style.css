@@ -1,9 +1,4 @@
 @charset "UTF-8";
-@import url(//fonts.googleapis.com/css?family=Open+Sans);
-@import url(//fonts.googleapis.com/css?family=PT+Mono);
-@import url(//fonts.googleapis.com/css?family=Oswald);
-@import url(//fonts.googleapis.com/css?family=Play);
-@import url(//fonts.googleapis.com/css?family=Jura);
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -2333,6 +2328,34 @@
   overflow: visible;
   clip: auto; }
 
+@font-face {
+  font-family: 'Fira Code';
+  src: url("../fonts/eot/FiraCode-Light.eot");
+  src: url("../fonts/eot/FiraCode-Light.eot") format("embedded-opentype"), url("../fonts/woff2/FiraCode-Light.woff2") format("woff2"), url("../fonts/woff/FiraCode-Light.woff") format("woff"), url("../fonts/ttf/FiraCode-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("../fonts/eot/FiraCode-Regular.eot");
+  src: url("../fonts/eot/FiraCode-Regular.eot") format("embedded-opentype"), url("../fonts/woff2/FiraCode-Regular.woff2") format("woff2"), url("../fonts/woff/FiraCode-Regular.woff") format("woff"), url("../fonts/ttf/FiraCode-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("../fonts/eot/FiraCode-Medium.eot");
+  src: url("../fonts/eot/FiraCode-Medium.eot") format("embedded-opentype"), url("../fonts/woff2/FiraCode-Medium.woff2") format("woff2"), url("../fonts/woff/FiraCode-Medium.woff") format("woff"), url("../fonts/ttf/FiraCode-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url("../fonts/eot/FiraCode-Bold.eot");
+  src: url("../fonts/eot/FiraCode-Bold.eot") format("embedded-opentype"), url("../fonts/woff2/FiraCode-Bold.woff2") format("woff2"), url("../fonts/woff/FiraCode-Bold.woff") format("woff"), url("../fonts/ttf/FiraCode-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
 body {
   margin: 0px;
   padding: 0px;
@@ -2344,12 +2367,13 @@ body {
   box-shadow: inset 0 0 300px rgba(153, 153, 153, 0.3);
   color: #444;
   position: absolute;
+  font-size: 14px;
   top: 0px;
   left: 0px; }
 
 body, input, button, h1, h2, h3, h4 {
-  font-family: "Jura";
-  color: #333; }
+  font-family: 'Fira Code';
+  color: #555; }
 
 * {
   box-sizing: border-box; }
@@ -2492,7 +2516,7 @@ button.fa, a.fa {
       border-radius: 100px;
       background: #eee;
       box-shadow: 0px 0px 17px #aaa;
-      font-size: 20px; }
+      font-size: 1.3em; }
     .modal .wrapper .modal-content {
       visibility: hidden;
       opacity: 0;
@@ -2517,7 +2541,7 @@ button.fa, a.fa {
     line-height: 32px;
     display: block;
     margin: 10px 0px;
-    font-size: 18px;
+    font-size: 1.1em;
     width: 100%; }
   .block input {
     border: 0px;
@@ -2623,7 +2647,7 @@ ul.accordion {
     line-height: 32px;
     cursor: pointer;
     text-align: center;
-    font-size: 16px;
+    font-size: 1em;
     transition: background .5s; }
     ul.accordion li > * {
       margin: 0px;
@@ -2640,6 +2664,8 @@ ul.accordion {
       text-align: left;
       width: 0px;
       opacity: 0;
+      line-height: 30px;
+      padding-top: 2px;
       transition: width .5s, opacity .3s .25s; }
     ul.accordion li:first-child {
       border-radius: 3px 0px 0px 3px; }
@@ -2655,7 +2681,7 @@ ul.accordion {
             opacity: 0;
             visibility: hidden; } }
     ul.accordion li:hover {
-      background: #f2f2f2; }
+      background: whitesmoke; }
 
 #ui header {
   margin: 0px;
@@ -2702,7 +2728,7 @@ ul.accordion {
       display: block;
       float: left; }
       #ui header ul.toolbar > li > a.fa {
-        font-size: 18px;
+        font-size: 1.1em;
         width: 20px;
         text-align: center; }
   #ui header button, #ui header .btn {
@@ -2713,7 +2739,7 @@ ul.accordion {
     height: 32px;
     line-height: 32px;
     float: left;
-    font-size: 16px;
+    font-size: 1em;
     border: 0px;
     background: #ededed;
     box-shadow: 1px 1px 3px #aaa;
@@ -2787,10 +2813,10 @@ ul.accordion {
     #ui .tasks > li.task {
       user-select: none;
       box-shadow: 1px 1px 3px #bbb;
-      background: #eaeaea;
+      background: #ededed;
       cursor: pointer; }
       #ui .tasks > li.task:hover {
-        background: #efefef;
+        background: whitesmoke;
         box-shadow: 1px 1px 4px #aaa; }
       #ui .tasks > li.task > :not(.wrapper) {
         margin: 0px;
@@ -2845,7 +2871,8 @@ ul.accordion {
       box-sizing: border-box;
       border-radius: 3px;
       display: block;
-      font-size: 20px;
+      font-size: 1.3em;
+      font-weight: 400;
       text-align: center;
       color: #777; }
 
@@ -2911,7 +2938,7 @@ ul.accordion {
   #ui .columns .tasks > li {
     display: inline-block;
     width: 100%;
-    font-size: 16px;
+    font-size: 1em;
     position: relative; }
     #ui .columns .tasks > li .task-name {
       width: 60%;
@@ -2959,7 +2986,7 @@ ul.accordion {
           height: 32px;
           line-height: 32px; }
         #ui .columns .tasks > li > h2 .dropdown ul {
-          font-size: 16px; }
+          font-size: 0.8em; }
 
 #ui .projects .group > h2 {
   margin: 0px;
@@ -2976,7 +3003,8 @@ ul.accordion {
   box-sizing: border-box;
   border-radius: 3px;
   display: block;
-  font-size: 20px;
+  font-size: 1.3em;
+  font-weight: 400;
   text-align: center;
   color: #777; }
 
@@ -3001,11 +3029,13 @@ ul.accordion {
     transition: background .5s, box-shadow .5s;
     user-select: none;
     box-shadow: 1px 1px 3px #bbb;
-    background: #eaeaea;
+    background: #ededed;
     cursor: pointer;
     width: 24.6%; }
     #ui .projects .group > ul > li:nth-child(4n) {
       margin-right: 0px; }
+    #ui .projects .group > ul > li:hover {
+      background: whitesmoke; }
     #ui .projects .group > ul > li > * {
       float: left; }
     #ui .projects .group > ul > li .project-name {
@@ -3017,7 +3047,7 @@ ul.accordion {
       line-height: 64px;
       padding: 0px 10px;
       width: 70%;
-      font-size: 18px;
+      font-size: 1.1em;
       box-sizing: border-box; }
     #ui .projects .group > ul > li .project-data {
       margin: 0px;
@@ -3035,7 +3065,6 @@ ul.accordion {
         box-sizing: border-box;
         height: 32px;
         line-height: 32px;
-        font-size: 14px;
         float: left;
         width: 100%;
         text-align: right;
@@ -3074,7 +3103,7 @@ ul.accordion {
         padding: 0px 10px;
         border: 0px;
         background: none;
-        font-size: 18px;
+        font-size: 1.1em;
         box-sizing: border-box;
         outline: none; }
     #ui .projects .group > ul > li .project-edit .project-users {
@@ -3137,7 +3166,7 @@ ul.accordion {
   #ui .calendar .tasks li {
     display: inline-block;
     width: 100%;
-    font-size: 16px; }
+    font-size: 1em; }
     #ui .calendar .tasks li label {
       margin: 0px;
       padding: 0px;
@@ -3149,6 +3178,10 @@ ul.accordion {
       text-align: center;
       width: 100%;
       border-bottom: 1px dashed #aaa; }
+    #ui .calendar .tasks li div {
+      display: block !important;
+      float: none !important;
+      height: auto !important; }
     #ui .calendar .tasks li .task-name {
       width: 100%; }
     #ui .calendar .tasks li .task-project {
@@ -3172,7 +3205,8 @@ ul.accordion {
   box-sizing: border-box;
   line-height: 64px;
   width: 100%;
-  font-size: 28px;
+  font-size: 1.4em;
+  font-weight: 400;
   text-align: center;
   outline: none;
   transition: box-shadow .7s; }
@@ -3191,7 +3225,7 @@ ul.accordion {
     height: 64px;
     line-height: 64px;
     width: 64px;
-    font-size: 28px;
+    font-size: 1.4em;
     text-align: center;
     cursor: pointer; }
   #ui .task-edit .task-type > ul {
@@ -3216,7 +3250,7 @@ ul.accordion {
   font-family: inherit;
   display: inline-block;
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 1.1em;
   color: #777;
   transition: height .7s, min-height .7s; }
   #ui .task-edit .task-story span {

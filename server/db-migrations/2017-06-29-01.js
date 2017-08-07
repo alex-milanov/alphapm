@@ -21,7 +21,7 @@ module.exports = ({db}) => {
 		Project.findAndModify({query: {name: task.project}, upsert: true},
 			(err, res) => {
 				// console.log(res, err);
-				task.set('project', res);
+				task.set('project', res.toObject());
 				task.save(err => console.log(err));
 			});
 	}));

@@ -16,13 +16,6 @@ const moment = require('moment');
 // util
 const {obj} = require('iblokz-data');
 
-// vex dialog
-const vex = require('vex-js');
-const prompt = (message, cb) => vex.dialog.prompt({
-	message,
-	callback: v => v && v !== '' && cb(v)
-});
-
 const langFlags = {
 	bg: 'bg',
 	en: 'gb',

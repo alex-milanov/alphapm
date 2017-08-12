@@ -14,7 +14,7 @@ module.exports = ({app, db, config}) => {
 		if (token) {
 			// verifies secret and checks exp
 			jwt.verify(token, config.jwt.secret, function(err, r) {
-				console.log({err, user: r._doc});
+				console.log({err, user: r});
 				if (err) {
 					// return res.json({success: false, message: 'Failed to authenticate token.'});
 					return next();

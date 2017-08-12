@@ -7,7 +7,6 @@ const {
 	form, frameset, legend, label, input, button
 } = require('iblokz-snabbdom-helpers');
 
-
 const getParent = (el, tagName) => (el.parentNode.tagName === tagName)
 	? el.parentNode
 	: getParent(el.parentNode, tagName);
@@ -16,8 +15,6 @@ const syncRect = (el, pos) => {
 	const posRect = el.getBoundingClientRect();
 	console.log(posRect);
 	const wrapperEl = el.querySelector('.wrapper');
-
-
 
 	Object.keys(pos).forEach(key => {
 		if (['top', 'left', 'right', 'width', 'height'].indexOf(key) > -1)

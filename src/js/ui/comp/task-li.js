@@ -12,10 +12,10 @@ const userImg = require('./user-img');
 
 // lib
 const moment = require('moment');
-const marked = require('marked');
 
 // util
 const collection = require('../../util/collection');
+const md = require('../../util/md');
 
 const taskTypeIcons = {
 	dev: 'fa-code',
@@ -35,6 +35,10 @@ const getTrackedTime = task => task.activities
 
 const getCurrentTracking = task => getTrackedTime(task) +
 	(getTimestamp() - task.activities.slice(-1).pop().start) * 1000;
+
+const calculateSize = (smallSize, bigSize, min, max, ln) => (ln > max)
+	? smallSize
+	: bigSize - (ln / max) * (bigSize - smallSize);
 
 module.exports = ({task, state, actions, opened = false}, content = false) => li('.task.modal', {
 	class: {opened},
@@ -77,17 +81,30 @@ module.exports = ({task, state, actions, opened = false}, content = false) => li
 			on: {blur: ev => actions.tasks.update(task._id, {name: ev.target.textContent}, false)}
 		}, task.name),
 		pre('.task-story', [
-			span('[contenteditable="true"][placeholder="Story ..."]', {
+			span('.wysiwyg[contenteditable="true"][placeholder="Story ..."]', {
 				on: {
 					focus: ev => {
-						ev.target.textContent = task.story || '';
-						// (ev.target.innerHTML = task.story ? marked(task.story) : '')
+						window.setTimeout(() => {
+							ev.target.textContent = task.story || '';
+							// (ev.target.innerHTML = task.story ? marked(task.story)
+							ev.target.classList.toggle('markdown');
+							ev.target.classList.toggle('wysiwyg');
+						}, 300);
 					},
 					blur: ev => {
 						actions.tasks.update(task._id, {story: ev.target.textContent}, false);
+						ev.target.innerHTML = md.toHTML(ev.target.textContent);
+						ev.target.classList.toggle('markdown');
+						ev.target.classList.toggle('wysiwyg');
 					}
+				},
+				props: {
+					innerHTML: task.story ? md.toHTML(task.story) : 'Story ...'
+				},
+				style: {
+					fontSize: calculateSize(0.8, 1.2, 0, 200, task.story && task.story.length || 0) + 'em'
 				}
-			}, task.story ? task.story : 'Story ...'),
+			}),
 			div('.task-story-edit-type', [
 				button('wysiwyg'),
 				button('markdown')

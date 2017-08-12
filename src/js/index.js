@@ -10,11 +10,6 @@ const moment = require('moment');
 require("moment/min/locales.min");
 moment.locale('bg');
 
-// vex code
-const vex = require('vex-js');
-vex.registerPlugin(require('vex-dialog'));
-vex.defaultOptions.className = 'vex-theme-top';
-
 // iblokz
 const vdom = require('iblokz-snabbdom-helpers');
 const {obj, arr} = require('iblokz-data');

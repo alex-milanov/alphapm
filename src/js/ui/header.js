@@ -40,15 +40,15 @@ module.exports = ({state, actions, views, i18n}) => header([
 					i(`.fa.fa-${view.icon}`),
 					span({
 						style: {
-							width: (view.key === state.view)
-								? ((i18n.views[view.key].length * ((state.lang !== 'ko') ? 9 : 16)) + 7) + 'px' : '0px'
+							// width: (view.key === state.view)
+							// 	? ((i18n.views[view.key].length * ((state.lang !== 'ko') ? 9 : 16)) + 7) + 'px' : '0px'
 						}
-					}, (view.key === state.view) ? i18n.views[view.key] : '')
+					}, i18n.views[view.key] + ' ')
 				])
 			)
 		)),
 		(['list', 'columns', 'calendar'].indexOf(state.view) > -1)
-			? li(button('.dropdown', [
+			? li(a('.btn.dropdown', [
 				span(state.project !== false && state.project.name || state.project || i18n.common.allProjects),
 				i('.handle.fa.fa-toggle-down'),
 				ul([].concat(

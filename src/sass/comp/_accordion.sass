@@ -19,11 +19,12 @@ ul.accordion
 		> span
 			display: inline-block
 			text-align: left
-			width: 0px
-			opacity: 0
+			transform: scaleX(0) translateX(-50%)
+			max-width: 0px
 			line-height: 30px
 			padding-top: 2px
-			transition: width .5s, opacity .3s .25s
+			white-space: pre
+			transition: transform 0.4s, max-width 0.5s, opacity 0.3s 0.25s
 		&:first-child
 			border-radius: 3px 0px 0px 3px
 		&:last-child
@@ -32,8 +33,10 @@ ul.accordion
 			background: $alphapm-color-card-bg
 			> span
 				opacity: 1
+				transform: scaleX(1) translateX(0%)
+				max-width: 120px
 				+phone
-					width: 0px!important
+					transform: scaleX(0) translateX(-50%)
 					opacity: 0
 					visibility: hidden
 		&:hover

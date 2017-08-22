@@ -2682,6 +2682,7 @@ ul.accordion {
           ul.accordion li.active > span {
             transform: scaleX(0) translateX(-50%);
             opacity: 0;
+            max-width: 0px;
             visibility: hidden; } }
     ul.accordion li:hover {
       background: whitesmoke; }
@@ -3216,11 +3217,10 @@ ul.accordion {
   #ui .task-edit h2:focus {
     box-shadow: inset 0px -4px 30px #ccc; }
 
-#ui .task-edit .task-type {
+#ui .task-edit .task-type, #ui .task-edit .task-settings {
   position: absolute;
-  top: 0px;
-  left: 0px; }
-  #ui .task-edit .task-type > i.fa, #ui .task-edit .task-type > i.fa:before {
+  top: 0px; }
+  #ui .task-edit .task-type > i.fa, #ui .task-edit .task-type > i.fa:before, #ui .task-edit .task-settings > i.fa, #ui .task-edit .task-settings > i.fa:before {
     margin: 0px;
     padding: 0px;
     display: inline-block;
@@ -3231,14 +3231,20 @@ ul.accordion {
     font-size: 1.4em;
     text-align: center;
     cursor: pointer; }
-  #ui .task-edit .task-type > ul {
+  #ui .task-edit .task-type > ul, #ui .task-edit .task-settings > ul {
     top: 55px;
     left: 25px; }
-    #ui .task-edit .task-type > ul > li {
+    #ui .task-edit .task-type > ul > li, #ui .task-edit .task-settings > ul > li {
       cursor: pointer; }
-      #ui .task-edit .task-type > ul > li .fa {
+      #ui .task-edit .task-type > ul > li .fa, #ui .task-edit .task-settings > ul > li .fa {
         width: 24px;
         text-align: center; }
+
+#ui .task-edit .task-type {
+  left: 0px; }
+
+#ui .task-edit .task-settings {
+  right: 0px; }
 
 #ui .task-edit .task-story {
   margin: 0px;

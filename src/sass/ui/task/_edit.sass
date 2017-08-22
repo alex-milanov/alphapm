@@ -10,10 +10,9 @@
 		transition: box-shadow .7s
 		&:focus
 			box-shadow: inset 0px -4px 30px #ccc
-	.task-type
+	.task-type, .task-settings
 		position: absolute
 		top: 0px
-		left: 0px
 		> i.fa, > i.fa:before
 			+header-height(64px)
 			width: 64px
@@ -28,7 +27,10 @@
 				.fa
 					width: 24px
 					text-align: center
-
+	.task-type
+		left: 0px
+	.task-settings
+		right: 0px
 	.task-story
 		+reset
 		position: relative

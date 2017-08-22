@@ -77,6 +77,13 @@ module.exports = ({task, state, actions, opened = false}, content = false) => li
 				]))
 			))
 		]),
+		span('.task-settings.dropdown', [
+			i(`.handle.fa.fa-sliders`),
+			ul([
+				li(span([i('.fa.fa-trash-o'), ' Archive'])),
+				li(span([i('.fa.fa-arrow-right'), ' Move To ']))
+			])
+		]),
 		h2('[contenteditable="true"]', {
 			on: {blur: ev => actions.tasks.update(task._id, {name: ev.target.textContent}, false)}
 		}, task.name),

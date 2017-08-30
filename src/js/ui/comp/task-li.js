@@ -77,11 +77,31 @@ module.exports = ({task, state, actions, opened = false}, content = false) => li
 				]))
 			))
 		]),
-		span('.task-settings.dropdown', [
+		span('.task-settings.dropdown.to-left', [
 			i(`.handle.fa.fa-sliders`),
 			ul([
-				li(span([i('.fa.fa-trash-o'), ' Archive'])),
-				li(span([i('.fa.fa-arrow-right'), ' Move To ']))
+				li([
+					span([i('.fa.fa-arrow-right'), ' Move To ']),
+					div('.sub',
+						ul((state.auth.user ? state.projects.list
+								.filter(p =>
+									p.createdBy === state.auth.user._id
+									|| p.users.find(u => u._id === state.auth.user._id).length > 0
+								) : []).map(project =>
+							li(span({
+								on: {
+									click: ev => actions.tasks.move(task._id, project._id)
+								}
+							}, [
+								project.name,
+								task.project._id === project._id
+									? i('.fa.fa-check-square-o')
+									: ''
+							]))
+						))
+					)
+				]),
+				li(span([i('.fa.fa-trash-o'), ' Archive']))
 			])
 		]),
 		h2('[contenteditable="true"]', {

@@ -9,9 +9,7 @@ const {
 // components
 const modal = require('./modal');
 
-
 module.exports = ({project, state, actions, opened = false}, content = false) => span('.project.modal', {
 }, [
-	content || '',
-	
+	content || ''
 ]);

@@ -2,13 +2,17 @@
 	position: relative
 	display: inline-block
 	float: left
+	.sub
+		position: absolute
+		top: 0px
+		> ul
+			top: 0px
 	ul
 		+reset
 		display: block
 		position: absolute
 		visibility: hidden
 		top: 36px
-		left: 0px
 		z-index: 99
 		background: #dfdfdf
 		box-shadow: 1px 1px 3px #aaa
@@ -36,7 +40,8 @@
 				opacity: .3
 				&:hover
 					opacity: 1
-	> .handle:hover + ul, > ul:hover
+
+	> .handle:hover + ul, > ul:hover, li:hover > .sub > ul
 		transition: opacity .05s, visibility .05s
 		visibility: visible
 		opacity: 1
@@ -51,18 +56,26 @@
 			&.active
 				background: #eaeaea
 
-.dropdown.flags
-	height: inherit
-	display: block
-	img
-		margin: 2px 0px
-		height: 28px
-		width: calc(28px / 3 * 4)
-	ul, li
-		width: 100%
-		background: none
-		box-shadow: none
-		border: 0px
+	&.to-left ul
+		right: 0px
+		.sub
+			left: 0px
+	&:not(.to-left) ul
+		left: 0px
+		.sub
+			right: 0px
+	&.flags
+		height: inherit
+		display: block
+		img
+			margin: 2px 0px
+			height: 28px
+			width: calc(28px / 3 * 4)
+		ul, li
+			width: 100%
+			background: none
+			box-shadow: none
+			border: 0px
 [class*='right'] .dropdown ul
 		right: 0px
 		left: initial

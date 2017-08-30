@@ -140,6 +140,16 @@ const toggleUser = (taskId, user) => state => obj.patch(state, 'tasks', {
 	})
 });
 
+const move = (taskId, projectId) => state => obj.patch(state, 'tasks', {
+	needsRefresh: true,
+	list: collection.patchAt(state.tasks.list, '_id', taskId, {
+		project: state.projects.list
+			.filter(p => p._id === projectId)
+			.map(({_id, name, users}) => ({_id, name, users}))
+			.pop()
+	})
+});
+
 module.exports = {
 	initial,
 	add,
@@ -149,5 +159,6 @@ module.exports = {
 	refresh,
 	upsert,
 	actUpdate,
-	toggleUser
+	toggleUser,
+	move
 };

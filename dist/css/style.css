@@ -2516,7 +2516,8 @@ button.fa, a.fa {
       border-radius: 100px;
       background: #eee;
       box-shadow: 0px 0px 17px #aaa;
-      font-size: 1.3em; }
+      font-size: 1.3em;
+      z-index: 101; }
     .modal .wrapper .modal-content {
       visibility: hidden;
       opacity: 0;
@@ -2551,6 +2552,11 @@ button.fa, a.fa {
   position: relative;
   display: inline-block;
   float: left; }
+  .dropdown .sub {
+    position: absolute;
+    top: 0px; }
+    .dropdown .sub > ul {
+      top: 0px; }
   .dropdown ul {
     margin: 0px;
     padding: 0px;
@@ -2560,7 +2566,6 @@ button.fa, a.fa {
     position: absolute;
     visibility: hidden;
     top: 36px;
-    left: 0px;
     z-index: 99;
     background: #dfdfdf;
     box-shadow: 1px 1px 3px #aaa;
@@ -2594,33 +2599,40 @@ button.fa, a.fa {
         opacity: .3; }
         .dropdown ul > li img:hover {
           opacity: 1; }
-  .dropdown > .handle:hover + ul, .dropdown > ul:hover {
+  .dropdown > .handle:hover + ul, .dropdown > ul:hover, .dropdown li:hover > .sub > ul {
     transition: opacity .05s, visibility .05s;
     visibility: visible;
     opacity: 1; }
-    .dropdown > .handle:hover + ul li, .dropdown > ul:hover li {
+    .dropdown > .handle:hover + ul li, .dropdown > ul:hover li, .dropdown li:hover > .sub > ul li {
       transition: height .17s;
       height: 28px; }
-      .dropdown > .handle:hover + ul li span, .dropdown > .handle:hover + ul li img, .dropdown > ul:hover li span, .dropdown > ul:hover li img {
+      .dropdown > .handle:hover + ul li span, .dropdown > .handle:hover + ul li img, .dropdown > ul:hover li span, .dropdown > ul:hover li img, .dropdown li:hover > .sub > ul li span, .dropdown li:hover > .sub > ul li img {
         height: 28px;
         transition: height .17s; }
-      .dropdown > .handle:hover + ul li:hover, .dropdown > ul:hover li:hover {
+      .dropdown > .handle:hover + ul li:hover, .dropdown > ul:hover li:hover, .dropdown li:hover > .sub > ul li:hover {
         background: #efefef; }
-      .dropdown > .handle:hover + ul li.active, .dropdown > ul:hover li.active {
+      .dropdown > .handle:hover + ul li.active, .dropdown > ul:hover li.active, .dropdown li:hover > .sub > ul li.active {
         background: #eaeaea; }
-
-.dropdown.flags {
-  height: inherit;
-  display: block; }
-  .dropdown.flags img {
-    margin: 2px 0px;
-    height: 28px;
-    width: calc(28px / 3 * 4); }
-  .dropdown.flags ul, .dropdown.flags li {
-    width: 100%;
-    background: none;
-    box-shadow: none;
-    border: 0px; }
+  .dropdown.to-left ul {
+    right: 0px; }
+    .dropdown.to-left ul .sub {
+      left: 0px; }
+  .dropdown:not(.to-left) ul {
+    left: 0px; }
+    .dropdown:not(.to-left) ul .sub {
+      right: 0px; }
+  .dropdown.flags {
+    height: inherit;
+    display: block; }
+    .dropdown.flags img {
+      margin: 2px 0px;
+      height: 28px;
+      width: calc(28px / 3 * 4); }
+    .dropdown.flags ul, .dropdown.flags li {
+      width: 100%;
+      background: none;
+      box-shadow: none;
+      border: 0px; }
 
 [class*='right'] .dropdown ul {
   right: 0px;
@@ -3232,8 +3244,7 @@ ul.accordion {
     text-align: center;
     cursor: pointer; }
   #ui .task-edit .task-type > ul, #ui .task-edit .task-settings > ul {
-    top: 55px;
-    left: 25px; }
+    top: 55px; }
     #ui .task-edit .task-type > ul > li, #ui .task-edit .task-settings > ul > li {
       cursor: pointer; }
       #ui .task-edit .task-type > ul > li .fa, #ui .task-edit .task-settings > ul > li .fa {
@@ -3242,9 +3253,13 @@ ul.accordion {
 
 #ui .task-edit .task-type {
   left: 0px; }
+  #ui .task-edit .task-type > ul {
+    left: 25px; }
 
 #ui .task-edit .task-settings {
   right: 0px; }
+  #ui .task-edit .task-settings > ul {
+    right: 25px; }
 
 #ui .task-edit .task-story {
   margin: 0px;

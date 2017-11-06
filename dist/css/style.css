@@ -2899,6 +2899,7 @@ ul.accordion {
   box-sizing: border-box;
   height: 32px;
   line-height: 32px;
+  display: block;
   padding: 0px 5px; }
   #ui #view.list .filter-row .filter-box {
     margin: 0px;

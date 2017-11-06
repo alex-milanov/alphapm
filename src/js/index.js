@@ -124,11 +124,18 @@ state$
 // tasks
 state$
 	.distinctUntilChanged(state => state.tasks.list)
-	.subscribe(state => {
+	.map(state => state.tasks.list.filter(task => task.needsSync).map(task => Object.assign({},
+		task, {needsSync: false}
+	)))
+	.filter(list => list.length > 0)
+	.subscribe(list => {
 		request
 			.patch('/api/tasks')
-			.send({list: state.tasks.list})
-			.then(res => console.log(res.body));
+			.send({list})
+			.then(res => (
+				console.log(res.body),
+				actions.tasks.sync(list.map(task => task._id))
+			));
 	});
 // projects
 state$

@@ -33,6 +33,7 @@ const add = ({name, project, type, status}) => state => [
 			users: [],
 			status: status || 'backlog',
 			est: 0,
+			needsSync: true,
 			createdAt: new Date(),
 			createdBy: state.auth.user && state.auth.user._id || null,
 			activities: []
@@ -44,7 +45,7 @@ const add = ({name, project, type, status}) => state => [
 
 const update = (id, patch, needsRefresh = false) => state => obj.patch(state, 'tasks', {
 	needsRefresh,
-	list: collection.patchAt(state.tasks.list, '_id', id, patch)
+	list: collection.patchAt(state.tasks.list, '_id', id, Object.assign({}, patch, {needsSync: true}))
 });
 
 const trackTime = (id, status, timestamp = new Date().getTime() / 1000 | 0) =>
@@ -52,6 +53,7 @@ const trackTime = (id, status, timestamp = new Date().getTime() / 1000 | 0) =>
 		needsRefresh: true,
 		list: collection.patchAt(state.tasks.list, '_id', id, task => Object.assign({}, task, {
 			status,
+			needsSync: true,
 			activities: (status === 'doing')
 				? (task.activities.length === 0 || ((timestamp - task.activities.slice(-1).pop().end) > 60))
 					? [].concat(
@@ -87,6 +89,7 @@ const trackTime = (id, status, timestamp = new Date().getTime() / 1000 | 0) =>
 			(task._id !== id && status === 'doing' && task.status === 'doing')
 				? Object.assign({}, task, {
 					status: 'todo',
+					needsSync: true,
 					activities: [].concat(
 						task.activities.slice(0, -1) || [],
 						Object.assign(
@@ -124,6 +127,7 @@ const upsert = tasks => state =>
 const actUpdate = (taskId, id, patch) => state => obj.patch(state, 'tasks', {
 	needsRefresh: false,
 	list: collection.patchAt(state.tasks.list, '_id', taskId, {
+		needsSync: true,
 		activities: collection.patchAt(
 			collection.elementAt(state.tasks.list, '_id', taskId).activities,
 			'_id', id, patch)
@@ -133,6 +137,7 @@ const actUpdate = (taskId, id, patch) => state => obj.patch(state, 'tasks', {
 const toggleUser = (taskId, user) => state => obj.patch(state, 'tasks', {
 	needsRefresh: false,
 	list: collection.patchAt(state.tasks.list, '_id', taskId, {
+		needsSync: true,
 		users: [collection.elementAt(state.tasks.list, '_id', taskId).users].map(taskUsers => [].concat(
 			taskUsers.filter(u => u._id !== user._id),
 			collection.indexAt(taskUsers, '_id', user._id) > -1 ? [] : user
@@ -143,11 +148,18 @@ const toggleUser = (taskId, user) => state => obj.patch(state, 'tasks', {
 const move = (taskId, projectId) => state => obj.patch(state, 'tasks', {
 	needsRefresh: true,
 	list: collection.patchAt(state.tasks.list, '_id', taskId, {
+		needsSync: true,
 		project: state.projects.list
 			.filter(p => p._id === projectId)
 			.map(({_id, name, users}) => ({_id, name, users}))
 			.pop()
 	})
+});
+
+const sync = ids => state => obj.patch(state, 'tasks', {
+	list: state.tasks.list.map(task => ids.indexOf(task._id) > -1 ? Object.assign({}, task, {
+		needsSync: false
+	}) : task)
 });
 
 module.exports = {
@@ -160,5 +172,6 @@ module.exports = {
 	upsert,
 	actUpdate,
 	toggleUser,
-	move
+	move,
+	sync
 };

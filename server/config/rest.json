@@ -11,6 +11,7 @@
 				"project": {
 					"_id": {"type": "ObjectId", "ref": "Project"},
 					"name": "String",
+					"archived": "Boolean",
 					"users": [{
 						"_id": {"type": "ObjectId", "ref": "User"},
 						"name": "String",
@@ -37,6 +38,7 @@
 				}],
 				"type": "String",
 				"status": "String",
+				"archived": "Boolean",
 				"milestone": "String",
 				"createdBy" : {"type": "ObjectId", "ref":"User", "required": false},
 				"createdAt": {"type": "Date", "default": "Date.now" }
@@ -50,6 +52,7 @@
 				"client": "String",
 				"team": "String",
 				"rate": "Number",
+				"archived": "Boolean",
 				"users": [{
 					"_id": {"type": "ObjectId", "ref": "User"},
 					"name": "String",

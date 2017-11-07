@@ -16,6 +16,7 @@ const upsert = (docs, collection, db) => {
 				? {project: {
 					name: doc.project.name,
 					_id: new ObjectID(doc.project._id),
+					archived: doc.project.archived,
 					users: doc.project.users ? doc.project.users.map(u => Object.assign({}, u, {
 						_id: new ObjectID(u._id)
 					})) : []

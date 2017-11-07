@@ -63,6 +63,7 @@ module.exports = ({state, actions, views, i18n}) => header([
 							? [].concat(projects, task.project)
 							: projects, [])
 					)
+					.filter(project => !project.archived)
 					.filter(project => state.project === false
 							|| (project._id && project._id !== state.project._id)
 							|| (!project._id && project !== state.project))

@@ -8,6 +8,7 @@ const {
 } = require('iblokz-snabbdom-helpers');
 const userImg = require('../comp/user-img');
 const modal = require('../comp/modal');
+const projectComp = require('../comp/project');
 
 // util
 const dom = require('../../util/dom');
@@ -36,6 +37,22 @@ module.exports = ({state, actions, i18n}) => section('#view.projects', [
 					(state.projects.editing === project._id) ? modal({
 						onClose: () => actions.projects.edit(null)
 					}, span('.project-edit', [
+						span('.task-settings.dropdown.to-left', [
+							i(`.handle.fa.fa-sliders`),
+							ul([
+								li(
+									{
+										on: {
+											click: ev => actions.projects.update(project._id, {archived: !project.archived})
+										}
+									},
+									span(project.archived
+										? [i('.fa.fa-envelope-open-o'), ' Restore']
+										: [i('.fa.fa-trash-o'), ' Archive']
+									)
+								)
+							])
+						]),
 						h2('[contenteditable="true"]', {
 							on: {blur: ev => actions.projects.update(project._id, {name: ev.target.textContent}, false)}
 						}, project.name),
@@ -46,8 +63,9 @@ module.exports = ({state, actions, i18n}) => section('#view.projects', [
 								click: () => actions.projects.toggleUser(project._id, user)
 							}))) : '',
 							li(button('.dropdown', [
-								i('.fa.fa-plus.handle'),
+								i('.fa.fa-plus.handle')
 								// show available users
+								/*
 								ul(collection.unique(state.users.list, [{
 									_id: project.createdBy
 								}].concat(project.users))
@@ -56,6 +74,7 @@ module.exports = ({state, actions, i18n}) => section('#view.projects', [
 										click: () => actions.projects.toggleUser(project._id, user)
 									})))
 								)
+								*/
 							]))
 						))
 					])) : ''

@@ -24,6 +24,7 @@ const latestTime = task => getTimestamp() - task.activities.filter(a => a.type =
 const statuses = ['backlog', 'todo', 'doing', 'done'];
 
 const prepTasks = state => state.tasks.list
+	.filter(task => !task.project.archived)
 	.filter(task =>
 		state.project === false || (task.project.name || task.project) === (state.project.name || state.project))
 	// filter by status

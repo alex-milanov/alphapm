@@ -13,7 +13,7 @@
     "watch:sass": "nodemon -w src/sass -e sass -x 'npm run build:sass'",
     "livereload": "livereload dist/**/*.css -d",
     "start": "nodemon server --ignore src/ & npm run watch",
-    "start:proc": "npm run build && PORT=3004 nodemon server & (sleep 10 && xdg-open http://localhost:3004)",
+    "start:proc": "npm run build && PORT=3004 nodemon server & (sleep 10 && ./bin/open.sh http://localhost:3004)",
     "sync:gh": "git checkout gh-pages && git rebase master && git push && git checkout master",
     "db:dump": "mongodump -d alphapm -o ./dump/$(date +%Y-%m-%d-%H-%M-%S)"
   },
@@ -40,7 +40,7 @@
     "rx": "^4.1.0",
     "rx-node": "^1.0.2",
     "snabbdom": "^0.5.4",
-    "sortablejs": "^1.5.1",
+    "sortablejs": "^1.7.0",
     "superagent": "^3.3.1",
     "to-markdown": "^3.1.0"
   },
